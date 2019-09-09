@@ -97,6 +97,8 @@ pub struct Process {
     cwd: PathBuf,
     root: PathBuf,
     memory: u64,
+    minflt: u64,
+    majflt: u64,
     parent: Option<Pid>,
     status: ProcessStatus,
     handle: HandleWrapper,
@@ -169,6 +171,8 @@ impl ProcessExt for Process {
                     root: root,
                     status: ProcessStatus::Run,
                     memory: 0,
+                    minflt: 0,
+                    majflt: 0,
                     cpu_usage: 0.,
                     old_cpu: 0,
                     old_sys_cpu: 0,
@@ -189,6 +193,8 @@ impl ProcessExt for Process {
                 root: PathBuf::new(),
                 status: ProcessStatus::Run,
                 memory: 0,
+                minflt: 0,
+                majflt: 0,
                 cpu_usage: 0.,
                 old_cpu: 0,
                 old_sys_cpu: 0,
@@ -236,6 +242,14 @@ impl ProcessExt for Process {
 
     fn memory(&self) -> u64 {
         self.memory
+    }
+
+    fn minflt(&self) -> u64 {
+        self.minflt
+    }
+
+    fn majflt(&self) -> u64 {
+        self.majflt
     }
 
     fn parent(&self) -> Option<Pid> {

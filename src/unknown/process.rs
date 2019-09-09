@@ -63,6 +63,14 @@ impl ProcessExt for Process {
         0
     }
 
+    fn minflt(&self) -> u64 {
+        0
+    }
+
+    fn majflt(&self) -> u64 {
+        0
+    }
+
     fn parent(&self) -> Option<Pid> {
         self.parent
     }

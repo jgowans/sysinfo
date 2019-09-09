@@ -124,6 +124,8 @@ pub struct Process {
     cwd: PathBuf,
     pub(crate) root: PathBuf,
     pub(crate) memory: u64,
+    pub(crate) minflt: u64,
+    pub(crate) majflt: u64,
     utime: u64,
     stime: u64,
     old_utime: u64,

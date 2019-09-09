@@ -453,10 +453,14 @@ fn _get_process_data(
 
             let clock_cycle = unsafe { sysconf(_SC_CLK_TCK) } as u64;
             let since_boot = u64::from_str(parts[21]).unwrap_or(0) / clock_cycle;
+            let minflt = u64::from_str(parts[9]).unwrap_or(0);
+            let majflt = u64::from_str(parts[11]).unwrap_or(0);
             let start_time = now.checked_sub(
                 uptime.checked_sub(since_boot).unwrap_or_else(|| 0),
             ).unwrap_or_else(|| 0);
             let mut p = Process::new(nb, parent_pid, start_time);
+            p.minflt = minflt;
+            p.majflt = majflt;
 
             p.status = parts[2].chars()
                                .next()

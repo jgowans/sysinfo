@@ -79,6 +79,12 @@ pub trait ProcessExt {
     /// Returns the memory usage (in kB).
     fn memory(&self) -> u64;
 
+    /// Returns the number of minor faults since the process started.
+    fn minflt(&self) -> u64;
+
+    /// Returns the number of major faults since the process started.
+    fn majflt(&self) -> u64;
+
     /// Returns the parent pid.
     fn parent(&self) -> Option<Pid>;
 
